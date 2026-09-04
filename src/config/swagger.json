@@ -1,0 +1,737 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de aluguel de veiculos",
+        "description": "Essa API tem como objetivo realizar as algueis de veiculos, bem como realizar as 4 operações do CRUD",
+        "contact": {
+            "email": "italo.crispim.dev@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/",
+            "description" : "API de teste"
+        }
+        
+    ],
+    "paths": {
+        "/veiculos": {
+            "post": {
+                "summary": "Cadastro de veiculo",
+                "description": "Esta rota será responsavel por cadastrar um novo veiculo",
+                "tags": ["Veiculos"],
+                "security": [{
+                    "bearerAuth": []
+                }],
+
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Veiculo"
+                            },
+                            "examples": {
+                                "veiculo": {
+                                    "value": {
+                                        "marca": "Fiat",
+                                        "modelo": "UNO",
+                                        "ano": 2015,
+                                        "placa": "INC-1Q31",
+                                        "valor_diaria": 100.00
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Veiculo cadastrado com sucesso"
+                    },
+                    "400":{
+                        "description": "Dados invalidos"
+                    },
+                    "409":{
+                        "description": "Placa já cadastrada"
+                    },
+                    "500":{
+                        "description": "Erro interno no servidor"
+                    },
+                    "401":{
+                        "description": "Token invalido ou expirado"
+                    },
+                    "403":{
+                        "description": "Acesso negado, conta sem permissão"
+                    }
+
+                }
+            },
+            "get": {
+                "description": "Listar todos os veiculos cadastrados",
+                "summary": "Listar todos os veiculos cadastrados",
+                "tags": ["Veiculos"],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Lista de veiculos cadastrados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Veiculo"
+                                    }
+                                }
+                            }
+                        }
+                    }, "401":{
+                        "description": "Token invalido ou expirado"
+                    }
+                }
+            }
+        },
+        "/veiculos/{id}": {
+            "get": {
+                "description": "Busca de um veiculo pelo ID",
+                "summary": "Busca de um veiculo pelo ID",
+                "tags": ["Veiculos"],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "ID do veiculo",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Veiculo"
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Veicuilo não encontrado"
+                    },
+                    "400":{
+                        "description": "ID invalido"
+                    },
+                    "401":{
+                        "description": "Token invalido ou expirado"
+                    }
+                }
+            },
+            "put": {
+                "description": "alterar um  veiculo pelo ID",
+                "summary": "alterar um veiculo pelo ID",
+                "tags": ["Veiculos"],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "ID do veiculo",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Veiculo"
+                            },
+                            "examples": {
+                                "veiculo": {
+                                    "value": {
+                                        "marca": "Fiat",
+                                        "modelo": "Toro",
+                                        "ano": 2025,
+                                        "placa": "INC-1Q12",
+                                        "valor_diaria": 500.00
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Veiculo"
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Veicuilo não encontrado"
+                    },
+                    "400": {
+                        "description": "Dados invalidos"
+                    },
+                    "401":{
+                        "description": "Token invalido ou expirado"
+                    },
+                    "403":{
+                        "description": "Acesso negado, conta sem permissão"
+                    },
+                    "409":{
+                        "description": "Não é possível alterar um veículo alugado ou utilizar uma placa já cadastrada"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deletar um veiculo pelo ID",
+                "summary": "Deletar um veiculo pelo ID",
+                "tags": ["Veiculos"],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "ID do veiculo",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Veiculo removido com sucesso"
+                    },
+                    "404":{
+                        "description": "Veicuilo não encontrado"
+                    },
+                    "409":{
+                        "description": "Não é possivel deletar um veiculo alugado"
+                    },
+                    "400":{
+                        "description": "ID invalido"
+                    }, 
+                    "401":{
+                        "description": "Token invalido ou expirado"
+                    },
+                    "403":{
+                        "description": "Acesso negado, conta sem permissão"
+                    },
+                    "500":{
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            }
+        },
+        "/alugueis":{
+            "get": {
+                "description": "Listar todos os alugueis cadastrados",
+                "summary": "Listar todos os alugueis cadastrados",
+                "tags": ["Alugueis"],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Lista de alugueis cadastrados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Aluguel"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "description": "Token invalido ou expirado"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Cadastro de Aluguel",
+                "description": "Esta rota será responsavel por cadastrar um novo aluguel",
+                "tags": ["Alugueis"],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Aluguel"
+                            },
+                            "examples": {
+                                "aluguel": {
+                                    "value": {
+                                        "id_veiculo": 1,
+                                        "data_inicio": "2026-08-31",
+                                        "data_fim": "2026-09-03"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Aluguel cadastrado com sucesso"
+                    },
+                    "400":{
+                        "description": "Dados invalidos"
+                    },
+                    "401":{
+                        "description": "Token invalido ou expirado"
+                    },
+                    "409":{
+                        "description": "Veiculo solicitado não está disponivel no momento"
+                    },
+                    "500":{
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/alugueis/{id}":{
+            "get": {
+                "description": "Busca de um aluguel pelo ID",
+                "summary": "Busca de um aluguel pelo ID",
+                "tags": ["Alugueis"],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "ID do aluguel",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Aluguel"
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "description":"Token invalido ou expirado"
+                    },
+                    "404":{
+                        "description": "Aluguel não encontrado"
+                    },
+                    "400":{
+                        "description": "ID invalido"
+                    }
+                }
+            },
+            "put": {
+                "description": "alterar um  aluguel pelo ID",
+                "summary": "alterar um aluguel pelo ID",
+                "tags": ["Alugueis"],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "ID do aluguel",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Aluguel"
+                            },
+                            "examples": {
+                                "veiculo": {
+                                    "value": {
+                                        "id_veiculo": 2,
+                                        "data_inicio": "2026-09-01",
+                                        "data_fim": "2026-09-21"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Aluguel"
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Aluguel ou veiculo não encontrado"
+                    },
+                    "400": {
+                        "description": "Dados invalidos"
+                    },
+                    "401":{
+                        "description": "Token invalido ou expirado"
+                    },
+                    "409":{
+                        "description": "Não é possível alterar um aluguel já finalizado"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            }
+            
+        },
+        "/alugueis/{id}/finalizar": {
+
+            "patch":{
+            "description": "Finalizar um aluguel pelo ID e disponibilizar o veículo novamente",
+            "summary": "Finalizar aluguel",
+            "tags": ["Alugueis"],
+            "security": [{
+                    "bearerAuth": []
+                }],
+
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "ID do aluguel",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+
+            "responses": {
+                "200": {
+                    "description": "Aluguel finalizado com sucesso, veículo disponível novamente"
+                },
+                "400": {
+                    "description": "ID inválido"
+                },
+                "401":{
+                    "description": "Token invalido ou expirado"
+                },
+                "403":{
+                    "description":"Acesso negado, conta sem permissão"
+                },
+                "404": {
+                    "description": "Aluguel ou veículo não encontrado"
+                },
+                "409": {
+                    "description": "Não é possível concluir um aluguel já finalizado"
+                },
+                "500": {
+                    "description": "Erro interno do servidor"
+                }
+            }
+            }
+        
+        },
+        "/usuarios":{
+            "post": {
+            "summary": "Cadastro de Usuarios",
+                "description": "Esta rota será responsavel por cadastrar um novo Usuario",
+                "tags": ["Usuarios"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Usuario"
+                            },
+                            "examples": {
+                                "Usuario": {
+                                    "value": {
+                                        "nomeUsuario": "Rodrigo Santos",
+                                        "email": "rodrigo@gmail.com",
+                                        "Senha": "sua_senha"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Usuario cadastrado com sucesso"
+                    },
+                    "400":{
+                        "description": "Dados invalidos"
+                    },
+                    "409":{
+                        "description": "Email já registrado no sistema"
+                    },
+                    "500":{
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/usuarios/{id}":{
+            "get": {
+                "description": "Busca de um Usuario pelo ID",
+                "summary": "Busca de um Usuario pelo ID",
+                "tags": ["Usuarios"],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "ID do usuario",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "description": "Token invalido ou expirado"
+                    },
+                    "403":{
+                        "description": "Acesso negado, conta sem permissão"
+                    },
+                    "404":{
+                        "description": "Usuario não encontrado"
+                    },
+                    "400":{
+                        "description": "ID invalido"
+                    }
+                }
+            }
+        },
+
+        "/auth":{
+            
+            "post":{
+                "summary": "Realizar login",
+                "description": "Autenticar um usuário e retorna um token JWT",
+                "tags": ["Autentificação"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Login"
+                            },
+                            "examples": {
+                                "value": {
+                                    "email": "rodrigo@gmail.com",
+                                    "Senha": "sua_senha"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login realizado com sucesso",
+                        "content": {
+                        "application/json": {
+                            "schema": {
+                            "type": "object",
+                            "properties": {
+                                "token": {
+                                "type": "string",
+                                "description": "Token JWT para autenticação nas rotas protegidas"
+                                }
+                            }
+                            }
+                        }
+                        }
+                    },
+                    "400":{
+                        "description": "Dados de login invalidos"
+                    },
+                    "401":{
+                        "description": "Email ou senha invalidos"
+                    },
+                    
+                    "500":{
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        }
+    },
+    
+
+    "components":{
+        "schemas": {
+            "Veiculo": {
+                "type": "object",
+                "required": [
+                    "marca",
+                    "modelo",
+                    "ano",
+                    "placa",
+                    "valor_diaria"
+                ],
+                "properties":{
+                    "id": {
+                        "type": "integer",
+                        "description": "ID gerado automaticamente pelo banco de dados",
+                        "readOnly": true
+                    },
+                    "marca": {
+                        "type": "string"
+                    },
+                    "modelo": {
+                        "type": "string"
+                    },
+                    "placa": {
+                        "type": "string"
+                    },
+                    "ano": {
+                        "type": "integer"
+                    },
+                    "valor_diaria": {
+                        "type":"number"
+                    },
+                    "status":{
+                        "type": "string",
+                        "description": "Status de veiculo é definido automaticamente pelo sistema",
+                        "readOnly": true
+                    }
+                }
+            },
+            "Aluguel":{
+                "type": "object",
+                "required":[
+                    "id_veiculo",
+                    "data_inicio",
+                    "data_fim"
+                ],
+                "properties":{
+                    "id": {
+                        "type": "integer",
+                        "description": "ID gerado automaticamente pelo banco de dados",
+                        "readOnly": true
+                    },
+                    "id_veiculo": {
+                        "type":"integer"
+                    },
+                    "data_inicio":{
+                        "type": "date"
+                    },
+                    "data_fim":{
+                        "type": "date"
+                    },
+                    "valor_total": {
+                        "type": "number",
+                        "description": "O valor total é calculado automaticamente pelo sistema",
+                        "readOnly": true
+                    },
+                    "status":{
+                        "type": "string",
+                        "description": "Status de aluguel é definido automaticamente pelo sistema",
+                        "readOnly": true
+                    }
+                }
+            },
+            "Usuario": {
+                "type": "object",
+                "required":[
+                    "nomeUsuario",
+                    "email",
+                    "senha"
+                ],
+                "properties":{
+                    "id": {
+                        "type": "integer",
+                        "description": "ID gerado automaticamente pelo banco de dados",
+                        "readOnly": true
+                    },
+                    "nomeUsuario":{
+                        "type": "string"
+                    },
+                    "email":{
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "senha": {
+                        "type": "string",
+                        "writeOnly": true 
+
+                    },
+                    "role":{
+                        "type":"string",
+                        "description": "role é gerado automaticamente no cadastro",
+                        "readOnly": true
+                    }
+                }
+            },
+            "Login": {
+                "type": "object",
+                "required": [
+                "email",
+                "senha"
+                ],
+                "properties": {
+                "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "admin@gmail.com"
+                },
+                "senha": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "SUA_SENHA"
+                }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
