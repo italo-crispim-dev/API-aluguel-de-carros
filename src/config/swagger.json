@@ -480,7 +480,7 @@
                                     "value": {
                                         "nomeUsuario": "Rodrigo Santos",
                                         "email": "rodrigo@gmail.com",
-                                        "Senha": "sua_senha"
+                                        "senha": "sua_senha"
                                     }
                                 }
                             }
