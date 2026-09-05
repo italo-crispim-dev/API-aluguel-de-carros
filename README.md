@@ -31,17 +31,17 @@ as variaveis de ambiente e instalar algumas dependências antes de executar.
 -  Essa API utiliza PostgreSQL, antes de executar é necessário criar um banco e definir seu nome no arquivo '.env' conforme descrito acima.
 
 ## Dependências:
-Essa API utiliza algumas depedências para funcionar corretamente que serão listadas abaixo:
+Essa API utiliza algumas dependências para funcionar corretamente, para instalar elas rode o comando `npm install` na raiz do projeto para instalar todas as dependencias, logo abaixo temos uma lista com uma breve descrição delas no projeto:
 
-1. **express** - Para API e rotas - `npm install express`;
-2. **sequelize** - ORM para trabalhar com PostgreSQL - `npm install sequelize`;
-3. **pg** - Driver do PostgreSQL para o node.js - `npm install pg`;
-4. **pg-hstore** - Suporte utilizado pelo sequelize com PostgreSQL - `npm install pg-hstore`;
-5. **dotenv** - Carregar as variaveis do .env - `npm install dotenv`;
-6. **jsonwebtoken** - Criar e verificar tokens JWT - `npm install jsonwebtoken`;
-7. **bcrypt** - Gerar hash e verificar senhas - `npm install bcrypt`;
-8. **zod** - validar os dados recebidos pela API - `npm install zod`;
-9. **swagger-ui-express** - Disponibilizar a documentação Swagger da API - `npm install swagger-ui-express`;
+1. **express** - Para API e rotas;
+2. **sequelize** - ORM para trabalhar com PostgreSQL;
+3. **pg** - Driver do PostgreSQL para o node.js;
+4. **pg-hstore** - Suporte utilizado pelo sequelize com PostgreSQL;
+5. **dotenv** - Carregar as variaveis do .env;
+6. **jsonwebtoken** - Criar e verificar tokens JWT;
+7. **bcrypt** - Gerar hash e verificar senhas;
+8. **zod** - validar os dados recebidos pela API;
+9. **swagger-ui-express** - Disponibilizar a documentação Swagger da API;
 
 ## Funcionalidades da API:
 
