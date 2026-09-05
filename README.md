@@ -64,12 +64,12 @@ Essa API utiliza algumas depedências para funcionar corretamente que serão lis
   - Buscar Usuarios por ID;
 
 
-### Autentificação
+### Autenticação
   - Login utilizando email e senha;
-  - autentificação com JWT;
+  - autenticação com JWT;
 
 
-## Autentificação e autorização
+## Autenticação e autorização
 A API utiliza **JWT (JSON Web Token)** para autenticação dos usuários.
 
 Após realizar o login utilizando e-mail e senha, a API retorna um token JWT.
@@ -100,11 +100,11 @@ Para acessar as rotas protegidas, é necessário enviar o token no cabeçalho:
   - Finalizar Aluguel;     | ADMIN
     
 ### Usuarios
-  - Cadastrar Usuarios;     | Não requer autentificação
+  - Cadastrar Usuarios;     | Não requer autenticação
   - Buscar Usuários por ID; | ADMIN
 
-### Autentificação
-  - Login utilizando email e senha; | Não requer autentificação
+### Autenticação
+  - Login utilizando email e senha; | Não requer autenticação
 
 ## Regras de negocio
 Os serviços dessa API, contam com algumas regras de negocio para garantir o gerenciamento adequado do aluguel dos veiculos, dentre elas podemos destacar:
