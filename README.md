@@ -32,14 +32,23 @@ as variaveis de ambiente e instalar algumas dependências antes de executar.
 
 ## Dependências:
   Essa API utiliza algumas depedências para funcionar corretamente que serão listadas abaixo:
+  
     1. **express** - Para API e rotas - `npm install express`;
+    
     2. **sequelize** - ORM para trabalhar com PostgreSQL - `npm install sequelize`;
+    
     3. **pg** - Driver do PostgreSQL para o node.js - `npm install pg`;
+    
     4. **pg-hstore** - Suporte utilizado pelo sequelize com PostgreSQL - `npm install pg-hstore`;
+    
     5. **dotenv** - Carregar as variaveis do .env - `npm install dotenv`;
+    
     6. **jsonwebtoken** - Criar e verificar tokens JWT - `npm install jsonwebtoken`;
+    
     7. **bcrypt** - Gerar hash e verificar senhas - `npm install bcrypt`;
+    
     8. **zod** - validar os dados recebidos pela API - `npm install zod`;
+    
     9. **swagger-ui-express** - Disponibilizar a documentação Swagger da API - `npm install swagger-ui-express`;
 
 ## 3 - Funcionalidades da API:
