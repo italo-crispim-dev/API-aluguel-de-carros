@@ -32,7 +32,6 @@ as variaveis de ambiente e instalar algumas dependências antes de executar.
 
 ## Dependências:
   Essa API utiliza algumas depedências para funcionar corretamente que serão listadas abaixo:
-  
     1. **express** - Para API e rotas - `npm install express`;
     2. **sequelize** - ORM para trabalhar com PostgreSQL - `npm install sequelize`;
     3. **pg** - Driver do PostgreSQL para o node.js - `npm install pg`;
