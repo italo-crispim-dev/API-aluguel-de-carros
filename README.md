@@ -43,7 +43,7 @@ Essa API utiliza algumas depedências para funcionar corretamente que serão lis
 8. **zod** - validar os dados recebidos pela API - `npm install zod`;
 9. **swagger-ui-express** - Disponibilizar a documentação Swagger da API - `npm install swagger-ui-express`;
 
-## 3 - Funcionalidades da API:
+## Funcionalidades da API:
 
 ### Veiculos
   - Cadastrar Veiculos;
@@ -67,6 +67,41 @@ Essa API utiliza algumas depedências para funcionar corretamente que serão lis
   - Login utilizando email e senha;
   - autentificação com JWT;
 
-3 - Funcionamento da API:
-  A API possui uma documentação Swagger que pode ser usada para consultar os endpoints e facilitar os testes
-  a documentação é acessivel em: http://localhost:3000/api-docs
+## Autentificação e autorização
+A API utiliza **JWT (JSON Web Token)** para autenticação dos usuários.
+
+Após realizar o login utilizando e-mail e senha, a API retorna um token JWT.
+Esse token deve ser enviado nas requisições às rotas protegidas.
+
+Algumas operações possuem **autorização por `role`**, sendo permitidas
+apenas para usuários com a role `ADMIN`. O usuário administrador padrão
+é criado automaticamente conforme descrito na configuração da aplicação.
+
+### Autenticação
+
+Para acessar as rotas protegidas, é necessário enviar o token no cabeçalho:
+
+`Authorization: Bearer SEU_TOKEN`
+
+### Veiculos 
+  - Cadastrar Veículos       |  ADMIN
+  - Listar veículos;         |  Usuário autenticado
+  - Buscar veículos por ID;  | Usuário autenticado
+  - Alterar Veículos por ID; | ADMIN
+  - Deletar Veículos por ID; | ADMIN
+
+### Alugueis
+  - Realizar Aluguel;      | Usuário autenticado
+  - Listar ALugueis;       | Usuário autenticado
+  - Buscar Aluguel por ID; | Usuário autenticado
+  - Alterar Aluguel;       | Usuário autenticado
+  - Finalizar Aluguel;     | ADMIN
+  - 
+### Usuarios
+  - Cadastrar Usuarios;     | Não requer autentificação
+  - Buscar Usuários por ID; | ADMIN
+
+### Autentificação
+  - Login utilizando email e senha; | Não requer autentificação
+
+
