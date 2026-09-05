@@ -109,13 +109,16 @@ Para acessar as rotas protegidas, é necessário enviar o token no cabeçalho:
 ## Regras de negocio
 Os serviços dessa API, contam com algumas regras de negocio para garantir o gerenciamento adequado do aluguel dos veiculos, dentre elas podemos destacar:
 
-1. Não é possível alterar um aluguel com o status de 'FINALIZADO'.
-2. Não é possível excluir um aluguel, ao invés disso. o aluguel tem seu status alterado de 'ATIVO' para 'Finalizado', essa operação também altera o status do veiculo de 'ALUGADO' para "DISPONIVEL".
-3. Não é possível associar um veiculo com o status 'ALUGADO' a um novo aluguel ou alteração de um aluguel existente.
-4. Não é possível deletar ou alterar um veiculo com o status 'ALUGADO'.
-5. Não é possível realizar um aluguel de um veiculo que não esteja com o status 'DISPONIVEL'
-6. Ao realizar um aluguel, o status do veículo é alterado de 'DISPONIVEL' para ALUGADO.
+1. Não é possível alterar um aluguel com o status de `FINALIZADO'`.
+2. Não é possível excluir um aluguel, ao invés disso. o aluguel tem seu status alterado de 'ATIVO' para `Finalizado`, essa operação também altera o status do veiculo de `ALUGADO` para `DISPONIVEL`.
+3. Não é possível associar um veiculo com o status `ALUGADO` a um novo aluguel ou alteração de um aluguel existente.
+4. Não é possível deletar ou alterar um veiculo com o status `ALUGADO`.
+5. Não é possível realizar um aluguel de um veiculo que não esteja com o status `DISPONIVEL`
+6. Ao realizar um aluguel, o status do veículo é alterado de `DISPONIVEL` para ALUGADO.
 7. O valor total do aluguel é calculado com base na quantidade de dias do aluguel e no valor da diária do veículo.
+
+## Documenteção com Swagger
+Essa API conta com uma documentação swagger para consultar os endpoints e facilitar os testes da API, a documentção estará acessivel em: http://localhost:3000/api-docs
 
 
 
