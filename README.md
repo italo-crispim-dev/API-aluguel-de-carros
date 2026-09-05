@@ -118,7 +118,7 @@ Os serviços dessa API, contam com algumas regras de negocio para garantir o ger
 7. O valor total do aluguel é calculado com base na quantidade de dias do aluguel e no valor da diária do veículo.
 
 ## Documenteção com Swagger
-Essa API conta com uma documentação swagger para consultar os endpoints e facilitar os testes da API, a documentção estará acessivel em: http://localhost:3000/api-docs
+Essa API conta com uma documentação swagger para consultar os endpoints e facilitar os testes da API, a documentção estará acessivel em: http://localhost:3000/api-docs , após todas as configurações acima estiverem criadas e em execução.
 
 
 
